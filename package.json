@@ -1,0 +1,73 @@
+{
+  "name": "nfe-mock",
+  "version": "0.1.0",
+  "description": "Gerador local de NF-e 4.00, chave de acesso e DANFE para desenvolvimento, QA e testes de integração, sem transmissão à SEFAZ.",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 3010",
+    "build": "next build",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "start": "next start --hostname 127.0.0.1 --port 3010",
+    "start:docker": "next start --hostname 0.0.0.0 --port 3010",
+    "seed": "node --import tsx scripts/seed.ts",
+    "test": "node --import tsx --test --test-concurrency=1 tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "test:pdf": "node --import tsx scripts/pdf-fixtures.ts",
+    "test:http": "node --import tsx scripts/http-smoke.ts",
+    "release": "semantic-release"
+  },
+  "engines": {
+    "node": ">=22.14"
+  },
+  "dependencies": {
+    "@brasil-fiscal/nfe": "2.0.7",
+    "@radix-ui/react-slot": "^1.3.3",
+    "better-sqlite3": "^12.11.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "decimal.js": "^10.6.0",
+    "drizzle-orm": "^0.45.2",
+    "fast-xml-parser": "^5.11.1",
+    "jszip": "^3.10.2",
+    "lucide-react": "^1.45.0",
+    "next": "^16.3.5",
+    "pdfkit": "0.18.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "xmllint-wasm": "5.3.0",
+    "zod": "^4.6.4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.5.3",
+    "@commitlint/config-conventional": "^20.5.3",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.2",
+    "@semantic-release/release-notes-generator": "^14.1.1",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^22.20.2",
+    "@types/pdfkit": "^0.17.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.5",
+    "prettier": "^3.9.6",
+    "semantic-release": "^25.0.8",
+    "tsx": "^4.23.13",
+    "typescript": "^5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mschueroff/nfe-mock.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mschueroff/nfe-mock/issues"
+  },
+  "homepage": "https://github.com/mschueroff/nfe-mock#readme"
+}

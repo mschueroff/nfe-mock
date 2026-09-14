@@ -1,0 +1,3 @@
+# Preserva os schemas fiscais oficiais byte a byte e ignora apenas os avisos de
+# espaços em branco herdados desses arquivos de terceiros.
+schemas/original/*.xsd -text -whitespace

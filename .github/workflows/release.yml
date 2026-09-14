@@ -1,0 +1,68 @@
+name: Release
+
+on:
+  push:
+    branches: [main, developer]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      created: ${{ steps.semantic.outputs.release_created }}
+      version: ${{ steps.semantic.outputs.version }}
+      revision: ${{ steps.revision.outputs.sha }}
+      channel: ${{ steps.channel.outputs.name }}
+    steps:
+      - name: Baixar o código-fonte
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: Configurar o Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22.14.0
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Criar a versão semântica
+        id: semantic
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run release
+      - name: Verificar a configuração do Docker Hub
+        if: steps.semantic.outputs.release_created == 'true'
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: test -n "$DOCKERHUB_USERNAME" && test -n "$DOCKERHUB_TOKEN"
+      - name: Registrar a revisão publicada
+        id: revision
+        if: steps.semantic.outputs.release_created == 'true'
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Selecionar o canal da versão
+        id: channel
+        if: steps.semantic.outputs.release_created == 'true'
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: if [ "$BRANCH" = developer ]; then echo 'name=beta' >> "$GITHUB_OUTPUT"; else echo 'name=stable' >> "$GITHUB_OUTPUT"; fi
+
+  docker:
+    needs: release
+    if: needs.release.outputs.created == 'true'
+    uses: ./.github/workflows/docker.yml
+    with:
+      version: ${{ needs.release.outputs.version }}
+      ref: ${{ needs.release.outputs.revision }}
+      channel: ${{ needs.release.outputs.channel }}
+    secrets: inherit

@@ -1,0 +1,33 @@
+name: Relato de erro
+description: Relate um defeito reproduzível no NF-e Mock
+title: '[Erro]: '
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Não inclua dados fiscais reais, certificados, credenciais ou arquivos XML privados.
+  - type: input
+    id: version
+    attributes:
+      label: Versão
+      placeholder: 0.1.0 or 0.2.0-beta.1
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: O que aconteceu?
+      description: Descreva o resultado obtido e o resultado esperado.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Passos para reproduzir
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Ambiente
+      description: Sistema operacional, versão do Node.js ou Docker e navegador.

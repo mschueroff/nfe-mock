@@ -1,0 +1,7 @@
+node_modules
+.next
+data
+tmp
+schemas/original
+package-lock.json
+AGENTS.md

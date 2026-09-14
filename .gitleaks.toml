@@ -1,0 +1,8 @@
+title = "Configuração da verificação de segredos do NF-e Mock"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Diretórios locais e gerados que nunca pertencem ao conteúdo publicável"
+paths = ['''(^|/)(node_modules|\.next|data|tmp)/''']

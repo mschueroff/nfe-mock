@@ -1,0 +1,22 @@
+name: Solicitação de funcionalidade
+description: Sugira uma melhoria para desenvolvimento ou testes de integração
+title: '[Funcionalidade]: '
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema de teste
+      description: Qual cenário de desenvolvimento ou QA é difícil hoje?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Comportamento proposto
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas

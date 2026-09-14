@@ -1,0 +1,11 @@
+{
+  "profile": "PL_009_V4-fd0c1228-unsigned-test-v1",
+  "source": "https://github.com/nfephp-org/sped-nfe/tree/fd0c1228509291d0d2f2b534a8bf81011a035e2c/schemes/PL_009_V4",
+  "change": "Os originais são preservados. Somente em memória, a ds:Signature obrigatória de TNFe torna-se opcional.",
+  "files": {
+    "xmldsig-core-schema_v1.01.xsd": "f56744a5f51c03f027de13f39f869307091781a9ef1d91b1ebe14719ce28e1ac",
+    "leiauteNFe_v4.00.xsd": "70499ad19d4c64282ec6a339692f5da84f2b7c57572b2b3b745525bfa1fa5e9a",
+    "tiposBasico_v4.00.xsd": "dff49f86741bc303cc5e5b5a7281267655079871627d82df49e3c7aff858f31d",
+    "nfe_v4.00.xsd": "0ac9d4c146b6db779f4b6a531045899b919d42e1bb87eb96d6f692bb14b8b646"
+  }
+}

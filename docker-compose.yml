@@ -1,0 +1,34 @@
+name: nfe-mock
+
+services:
+  nfe-mock:
+    image: ${DOCKER_IMAGE:-nfe-mock:local}
+    build:
+      context: .
+      args:
+        APP_VERSION: ${APP_VERSION:-0.1.0}
+        APP_COMMIT: ${APP_COMMIT:-development}
+        SOURCE_URL: ${SOURCE_URL:-}
+    ports:
+      - '${HOST_BIND:-127.0.0.1}:${PORT:-3010}:3010'
+    volumes:
+      - nfe_mock_data:/app/data
+    environment:
+      NFE_DATA_DIR: /app/data
+      NEXT_TELEMETRY_DISABLED: '1'
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:3010/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+
+volumes:
+  nfe_mock_data:
