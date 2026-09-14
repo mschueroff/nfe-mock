@@ -1,6 +1,6 @@
 {
   "name": "nfe-mock",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Gerador local de NF-e 4.00, chave de acesso e DANFE para desenvolvimento, QA e testes de integração, sem transmissão à SEFAZ.",
   "private": true,
   "license": "MIT",

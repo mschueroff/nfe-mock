@@ -1,3 +1,10 @@
+# 1.0.0 (2026-09-14)
+
+
+### Features
+
+* initial public release ([f76a779](https://github.com/mschueroff/nfe-mock/commit/f76a779c6aa7f4b8ba8cbef66445be717929395a))
+
 # Histórico de mudanças
 
 As mudanças estáveis relevantes do NF-e Mock são registradas neste arquivo.
